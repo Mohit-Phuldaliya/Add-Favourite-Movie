@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
 
 import './index.css';
 import App from './Components/App';
 
 import rootReducer from './reducers'; 
-import { act } from 'react-dom/test-utils';
 
 
 
@@ -26,12 +26,23 @@ import { act } from 'react-dom/test-utils';
 
 const logger = ({dispatch, getstate}) => (next) => (action) =>{
     //logger code
+    if(typeof action !== 'function'){
     console.log('ACTION_TYPE', action.type)
+    }
     next(action);
 }
 
+// const thunk = ({dispatch, getstate}) => (next) => (action) =>{
+//     //logger code
+//     if(typeof action === 'function'){
+//         action(dispatch);
+//         return;
+//     }
+//     next(action);
+// }
+// now instead of above creating thunk we using redux thunk pakage
 
-const store = createStore(rootReducer, applyMiddleware(logger)); // rootReducer from reducers
+const store = createStore(rootReducer, applyMiddleware(logger,thunk)); // rootReducer from reducers
 
 // console.log('store', store);     
 // console.log('State', store.getState()); 
