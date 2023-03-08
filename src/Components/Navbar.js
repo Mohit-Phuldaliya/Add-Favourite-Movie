@@ -54,6 +54,7 @@ class Navbar extends React.Component{
 
                             <div className="movie-info">
                                 <span>{movie.Title}</span>
+                                <p>{movie.Plot}</p>
                                 <button onClick={()=>this.handleAddToMovies(movie)}>Add to Movies</button>
                             </div>
 
